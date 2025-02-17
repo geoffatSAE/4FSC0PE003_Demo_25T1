@@ -8,6 +8,23 @@ public class EnemyManager : MonoBehaviour
     //public float[] distancesOfEnemies;
     public Transform turretTransform;
 
+    public static EnemyManager Instance;
+
+    void Awake()
+    {
+        if(Instance != null)  //check if the instance already exists
+        {
+            //it does
+            Debug.LogError("Second (ore more) singleton has been intialised on " + gameObject.name);
+            //deestory the second of more singleton
+            Destroy(gameObject);
+            return; //exit the awake
+        }
+
+        //set the instance to this object, as it's the singleton
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

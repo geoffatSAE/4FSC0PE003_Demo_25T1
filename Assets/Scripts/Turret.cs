@@ -5,7 +5,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class Turret : MonoBehaviour
 {
-    public EnemyManager enemyManager;
+    //public EnemyManager enemyManager;
 
     public Vector3 pointA;
     public Vector3 pointB;
@@ -27,7 +27,9 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //enemyManager = GameObject.FindAnyObjectByType<EnemyManager>();
+        //if (enemyManager == null) Debug.LogWarning("No enemy manager found");
+
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class Turret : MonoBehaviour
         switch (turretSM)
         {
             case TurretSM.Targetting:
-                Transform closestEnemytransformCheck = enemyManager.ClosestEnemy().transform;
+                Transform closestEnemytransformCheck = EnemyManager.Instance.ClosestEnemy().transform;
                 pointA = transform.position;
                 pointB = closestEnemytransformCheck.position;
 
@@ -54,7 +56,7 @@ public class Turret : MonoBehaviour
                 break;
 
             case TurretSM.Following:
-                Transform closestEnemytransform = enemyManager.ClosestEnemy().transform;
+                Transform closestEnemytransform = EnemyManager.Instance.ClosestEnemy().transform;
                 transform.LookAt(closestEnemytransform.position);
 
                 pointA = transform.position;
